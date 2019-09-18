@@ -13,4 +13,13 @@ function renderButtons(){
     }
 };
 
+//function for adding new animal searches
+$("#add-animal").on("click", function(event){
+    event.preventDefault();
+    var animal = $("#animal-input").val().trim();
+    animals.push(animal);
+    renderButtons();
+    console.log(animal);
+})
+
 renderButtons();
