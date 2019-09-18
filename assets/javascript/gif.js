@@ -10,6 +10,7 @@ function renderButtons(){
         a.attr("data-name", animals[i]);
         a.text(animals[i]);
         $("#buttons-view").append(a);
+        // $("#animal-input").reset();
     }
 };
 
@@ -19,7 +20,7 @@ $("#add-animal").on("click", function(event){
     var animal = $("#animal-input").val().trim();
     animals.push(animal);
     renderButtons();
-    // console.log(animal);
+    // console.log(animal);    
 });
-
+// need something to clear out input box after button is generated
 renderButtons();
