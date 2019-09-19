@@ -5,20 +5,30 @@ var animals = ["llama", "monkey", "penguin"];
 function renderButtons(){
     $("#buttons-view").empty();
     for (var i=0; i < animals.length; i++) {
+        var animal = animals[i];
         var a = $("<button>");
-        a.addClass("data-animal");
-        a.attr("data-name", animals[i]);
-        a.text(animals[i]);
-        // $(".data-animal").attr("data", this);
+        a.addClass("animal");
+        a.attr("data-animal", animal);
+        a.text(animal);
         $("#buttons-view").append(a);
-        console.log(this);
     }
 };
 
+//function for adding new buttons for animal searches
+$("#add-animal").on("click", function(event){
+    event.preventDefault();
+    var animal1 = $("#animal-input").val().trim();
+    animals.push(animal1);
+    renderButtons();
+    $("#animal-input").val("");
+    console.log(animal1);
+});
+
 //what happens on click event listeners
-$("button").on("click", function () {
+$(document).on("click", "button", function () {
     var animal = $(this).attr("data-animal");
-    console.log(this);
+    // console.log(this);
+    console.log(animal);
     // Constructing a queryURL using the animal name
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=hT1a4XL2GVninkgqI7yLPfGpuvdvP0Xu&limit=10";
 
@@ -27,27 +37,14 @@ $("button").on("click", function () {
         url: queryURL,
         method: "GET"
     })
+        .then(function(response){
+            console.log(queryURL);
+            console.log(response);
+        })
 })
 
+
     
 
-//here is what happens after we send a request
-// .then(function(response) {
-//     console.log(queryURL);
-// var searchAnimals = response.data;
-// for(var i= 0; i < searchAnimals.length; i++);
-// })
-
-
-//function for adding new buttons for animal searches
-$("#add-animal").on("click", function(event){
-    event.preventDefault();
-    var animal1 = $("#animal-input").val().trim();
-    animals.push(animal1);
-    $("#animal-input").val("");
-    renderButtons();
-    
-    console.log(animal1);    
-});
 
 renderButtons();
