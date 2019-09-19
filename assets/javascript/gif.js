@@ -6,34 +6,37 @@ function renderButtons(){
     $("#buttons-view").empty();
     for (var i=0; i < animals.length; i++) {
         var a = $("<button>");
-        a.addClass("animal");
+        a.addClass("data-animal");
         a.attr("data-name", animals[i]);
         a.text(animals[i]);
+        // $(".data-animal").attr("data", this);
         $("#buttons-view").append(a);
-        $("button").on("click", function(){
-        var a = $(this).attr("data");
         console.log(this);
-        });
     }
 };
 
-function query(){
+//what happens on click event listeners
+$("button").on("click", function () {
+    var animal = $(this).attr("data-animal");
+    console.log(this);
     // Constructing a queryURL using the animal name
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=hT1a4XL2GVninkgqI7yLPfGpuvdvP0Xu&limit=10";
 
     //this does an AJAX request with queryURL
     $.ajax({
-    url: queryURL,
-    method: "GET"
+        url: queryURL,
+        method: "GET"
+    })
 })
-};
+
+    
 
 //here is what happens after we send a request
-.then(function(response) {
-    console.log(queryURL);
-var searchAnimals = response.data;
-for(var i= 0; i < searchAnimals.length; i++);
-})
+// .then(function(response) {
+//     console.log(queryURL);
+// var searchAnimals = response.data;
+// for(var i= 0; i < searchAnimals.length; i++);
+// })
 
 
 //function for adding new buttons for animal searches
