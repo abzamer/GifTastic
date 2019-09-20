@@ -1,5 +1,5 @@
 //initial array of animals
-var animals = ["llama", "monkey", "penguin", "elephant", ""];
+var animals = ["llama", "monkey", "penguin", "elephant", "turkey", "cat", "dog", "camel", "frog"];
 
 //function for displaying animal data/buttons for initial array
 function renderButtons(){
@@ -45,18 +45,35 @@ $(document).on("click", "button", function () {
                var animalDiv = $("<div>");
                 var p = $("<p>").text("Rating: " + results[i].rating);
                 var animalImage = $("<img>");
+                animalImage.attr("class", "gif");
                 animalImage.attr("src", results[i].images.fixed_height_still.url);
                 animalImage.attr("data-still", results[i].images.fixed_height_still.url);
+                animalImage.attr("data-animate", results[i].images.fixed_width.url);
+                animalImage.attr("data-state", "still");
                 animalDiv.append(p);
                 console.log(animalImage);
                 animalDiv.append(animalImage);
                 $("#gifs-go-here").prepend(animalDiv);
+
+                $(".gif").on("click", function() {
+                    //alert("I'm in the onClick!");
+                    var state = $(this).attr("data-state");
+                    if (state === "still") {
+                      $(this).attr("src", $(this).attr("data-animate"));
+                    //   console.log(this);
+                      $(this).attr("data-state", "animate");
+                    //   console.log("changed my state to animate");
+                    } else {
+                      $(this).attr("src", $(this).attr("data-still"));
+                      $(this).attr("data-state", "still");
+                    //   console.log("changed my state to still");
+                    }
+                  });
             }
+
+            
         });
 });
 
 renderButtons();
 
-
-//fixed_height_still
-//fixed_width
