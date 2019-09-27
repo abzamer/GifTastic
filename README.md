@@ -1,2 +1,2 @@
 # GifTastic
-This site will populate goat gifs.
+https://abzamer.github.io/GifTastic/
